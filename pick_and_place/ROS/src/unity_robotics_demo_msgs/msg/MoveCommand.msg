@@ -1,0 +1,3 @@
+string move_command
+float64 radians
+float64 centimeters
