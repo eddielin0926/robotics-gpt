@@ -78,9 +78,6 @@ class RobotController:
 
         print('Calling service...')
         result = self.service.call(request)
-
-        print(name)
-        print(result)
         
         return result["object_pose"]
     
@@ -96,3 +93,21 @@ class RobotController:
         self.ros_client.terminate()
     
 ###
+
+# Pick up green block and put it in the black bin.
+# The robot can only hold one object at a time.
+robot = RobotController()
+scene = robot.get_scene_objects()
+
+# Find the green block
+green_block = next((o for o in scene if o.get_color() == Color.Green and o.get_object_type() == SceneObjectType.Block), None)
+
+# Find the black bin
+black_bin = next((o for o in scene if o.get_color() == Color.Black and o.get_object_type() == SceneObjectType.Bin), None)
+        
+if green_block != None and black_bin != None:
+    robot.pick_and_place(green_block.get_pose(), black_bin.get_pose())
+else:
+    print("Could not find green block or black bin.")
+
+

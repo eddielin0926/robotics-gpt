@@ -88,7 +88,7 @@ public class MycobotTrajectoryPlanner : MonoBehaviour
         // process the service request
         Debug.Log($"Received Pick And Place request");
 
-        this.PickAndPlace(request.pick_pose, request.place_pose);
+        PickAndPlace(request.pick_pose, request.place_pose);
     }
 
     void OnMoveCommand(MoveCommandMsg request)
@@ -299,7 +299,7 @@ public class MycobotTrajectoryPlanner : MonoBehaviour
 
                 // Fill-in the response with the object pose converted from Unity coordinate to ROS coordinate system
                 sceneObj.pose.position = (gameObject.transform.position + m_PickPoseOffset).To<FLU>();
-                sceneObj.pose.orientation = Quaternion.Euler(90, gameObject.transform.eulerAngles.y, 0).To<FLU>();
+                sceneObj.pose.orientation = Quaternion.Euler(0, gameObject.transform.eulerAngles.y, -90).To<FLU>();
 
                 found_objects.Add(sceneObj);
             }
@@ -324,7 +324,7 @@ public class MycobotTrajectoryPlanner : MonoBehaviour
         {
             // Fill-in the response with the object pose converted from Unity coordinate to ROS coordinate system
             objectPoseResponse.object_pose.position = (gameObject.transform.position + m_PickPoseOffset).To<FLU>();
-            objectPoseResponse.object_pose.orientation = Quaternion.Euler(90, gameObject.transform.eulerAngles.y, 0).To<FLU>();
+            objectPoseResponse.object_pose.orientation = Quaternion.Euler(0, gameObject.transform.eulerAngles.y, 0).To<FLU>();
         }
 
         return objectPoseResponse;
