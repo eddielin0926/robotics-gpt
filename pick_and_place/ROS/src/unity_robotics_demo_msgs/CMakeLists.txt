@@ -9,11 +9,16 @@ find_package(catkin REQUIRED COMPONENTS
 )
 
 add_message_files(FILES
-    PosRot.msg
-    UnityColor.msg
+  MoveCommand.msg
+  PickAndPlace.msg
+  PosRot.msg
+  SceneObject.msg
+  UnityColor.msg
 )
+
 add_service_files(FILES
-    ObjectPoseService.srv
+  GetSceneObjectsService.srv
+  ObjectPoseService.srv
 	PositionService.srv
 )
 

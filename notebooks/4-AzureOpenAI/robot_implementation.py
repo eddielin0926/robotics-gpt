@@ -47,14 +47,14 @@ class SceneObject:
 
 class RobotController:
     def __init__(self):
-        self.ros_client = roslibpy.Ros(host='localhost', port=8080)
+        self.ros_client = roslibpy.Ros(host='localhost', port=9090)
         self.ros_client.run()
         print('Is ROS connected?', self.ros_client.is_connected)
-        self.talker = roslibpy.Topic(self.ros_client, '/unity/pick_and_place', 'niryo_moveit/PickAndPlace')
-        self.service = roslibpy.Service(self.ros_client, '/unity/object_pose_svc', 'niryo_moveit/ObjectPoseService')
+        self.talker = roslibpy.Topic(self.ros_client, '/unity/pick_and_place', 'unity_robotics_demo_msgs/PickAndPlace')
+        self.service = roslibpy.Service(self.ros_client, '/unity/object_pose_svc', 'unity_robotics_demo_msgs/ObjectPoseService')
         self.get_scene_objects_svc = roslibpy.Service(self.ros_client,
                                                       '/unity/get_scene_objects_svc',
-                                                      'niryo_moveit/GetSceneObjectsService')
+                                                      'unity_robotics_demo_msgs/GetSceneObjectsService')
     
     def get_scene_objects(self) -> List[SceneObject]:
         """Gets all objects in the visual scene."""
